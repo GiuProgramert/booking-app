@@ -3,7 +3,7 @@ import personaRouter from "./src/routes/persona.js";
 import habitacionRouter from "./src/routes/habitacion.js";
 import reservaRouter from "./src/routes/reserva.js";
 
-import connection from "./src/config/database.js";
+import connection, { select } from "./src/config/database.js";
 
 const app = express();
 const port = 3000;
@@ -12,7 +12,7 @@ app.use("/persona", personaRouter);
 app.use("/habitacion", habitacionRouter);
 app.use("/reserva", reservaRouter);
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.send("Booking-App Running");
 });
 

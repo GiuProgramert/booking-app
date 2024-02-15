@@ -3,7 +3,7 @@ import personaRouter from "./src/routes/persona.js";
 import habitacionRouter from "./src/routes/habitacion.js";
 import reservaRouter from "./src/routes/reserva.js";
 
-import connection, { select } from "./src/config/database.js";
+import connection from "./src/config/database.js";
 
 const app = express();
 const port = 3000;

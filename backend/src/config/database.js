@@ -5,6 +5,7 @@ const connection = await createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  
 });
 
 /**
@@ -12,10 +13,10 @@ const connection = await createConnection({
  * @param {string} query
  * @param {Array<*>} params 
  */
-export const select = async (query, params = []) => {
-  const [results] = await connection.execute(query, params);
+export const executeQuery = async (query, params = []) => {
+  const [results, fields] = await connection.execute(query, params);
 
-  return results;
+  return [results, fields];
 }
 
 export default connection;

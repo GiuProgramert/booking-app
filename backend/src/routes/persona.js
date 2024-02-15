@@ -1,8 +1,10 @@
 import { Router } from "express";
+import { getPersonas } from "../services/persona.js";
 const personaRouter = Router();
 
-personaRouter.get("", (req, res) => {
-  res.send('test');
+personaRouter.get("", async (req, res) => {
+  const personas = getPersonas();
+  res.send(personas);
 });
 
 personaRouter.post("", (req, res) => {});

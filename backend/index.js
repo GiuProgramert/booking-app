@@ -3,10 +3,10 @@ import personaRouter from "./src/routes/persona.js";
 import habitacionRouter from "./src/routes/habitacion.js";
 import reservaRouter from "./src/routes/reserva.js";
 
-import connection from "./src/config/database.js";
-
 const app = express();
 const port = 3000;
+
+app.use(express.json())
 
 app.use("/persona", personaRouter);
 app.use("/habitacion", habitacionRouter);

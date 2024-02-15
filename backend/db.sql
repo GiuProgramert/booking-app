@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `habitacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `habitacion` (
-  `id` int NOT NULL,
+  `id` int AUTO_INCREMENT NOT NULL,
   `habitacionpiso` int NOT NULL,
   `habitacionnro` int NOT NULL,
   `cantcamas` int NOT NULL,
@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `persona`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `persona` (
-  `id` int NOT NULL,
+  `id` int AUTO_INCREMENT NOT NULL,
   `nombrecompleto` varchar(255) NOT NULL,
   `nrodocumento` varchar(10) NOT NULL,
   `correo` varchar(255) DEFAULT NULL,
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `reserva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reserva` (
-  `id` int NOT NULL,
+  `id` int AUTO_INCREMENT NOT NULL,
   `fechareserva` date DEFAULT NULL,
   `fechaentrada` date DEFAULT NULL,
   `fechasalida` date DEFAULT NULL,

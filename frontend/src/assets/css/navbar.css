@@ -1,0 +1,33 @@
+.navbar {
+  background-color: rgb(128, 185, 235);
+  height: 50px;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.068) 0px 14px 28px, rgba(0, 0, 0, 0.171) 0px 10px 10px;
+
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 20px;
+  padding: 0px 20px;
+  height: 100%;
+}
+
+.nav-link {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0px 10px;
+  font-weight: bold;
+  transition: .1s ease-in-out;
+}
+
+.nav-link:hover {
+  color: white;
+  text-decoration: none;
+  background-color: rgb(90, 130, 165);
+}

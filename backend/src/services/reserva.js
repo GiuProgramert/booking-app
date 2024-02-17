@@ -67,19 +67,26 @@ export const deleteReserva = async (id) => {
     [id]
   );
 
-  return results
-}
+  return results;
+};
 
-export const isHabitacionFree = async (habitacionid, fechaentrada, fechasalida) => {
-  const [results] = await executeQuery(`
+export const isHabitacionFree = async (
+  habitacionid,
+  fechaentrada,
+  fechasalida
+) => {
+  const [results] = await executeQuery(
+    `
     SELECT * FROM reservas 
     WHERE 
       fechaentrada <= ? AND 
       fechasalida >= ? AND
       habitacionid = ?
-  `, [fechaentrada, fechasalida, habitacionid]);
+  `,
+    [fechaentrada, fechasalida, habitacionid]
+  );
 
-  const isFree = results.length === 0
+  const isFree = results.length === 0;
 
   return isFree;
-}
+};

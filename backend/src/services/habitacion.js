@@ -28,7 +28,7 @@ export const addHabitacion = async (newHabitacion) => {
   const [results] = await executeQuery(
     `
       INSERT INTO habitacion (habitacionpiso, habitacionnro, cantcamas, tienetelevision, tienefrigobar)  
-      VALUES  (?, ?, ?, ?)
+      VALUES  (?, ?, ?, ?, ?)
     `,
     newHabitacionValues
   );

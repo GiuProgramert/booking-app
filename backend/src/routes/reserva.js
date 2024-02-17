@@ -1,7 +1,14 @@
 import { Router } from "express";
-import { addReserva, getReservaById, getReservas, isHabitacionFree } from "../services/reserva.js";
+import {
+  addReserva,
+  getReservaById,
+  getReservas,
+  updateReserva,
+  deleteReserva,
+} from "../services/reserva.js";
 import Reserva from "../schemas/reserva.js";
 import getDaysBetweenDates from "../helpers/getDaysBetweenDates.js";
+import ReservaController from "../controllers/reseva.js";
 
 const reservaRouter = Router();
 
@@ -29,22 +36,7 @@ reservaRouter.post("", async (req, res) => {
       0
     );
 
-    if (!isHabitacionFree(
-      newReserva.habitacionid,
-      newReserva.fechaentrada,
-      newReserva.fechasalida
-    )) {
-      throw new Error("habitacion not free");
-    }
-
-    const today = new Date();
-    if (newReserva.fechaentrada > today) {
-      throw new Error("fechaentrada must be greater that today");
-    }
-
-    if (newReserva.fechaentrada > newReserva.fechasalida) {
-      throw new Error("fechasalida must be greater tha fechaentrada");
-    }
+    ReservaController.validate(newReserva);
 
     const diffDays = getDaysBetweenDates(
       newReserva.fechaentrada,
@@ -60,32 +52,54 @@ reservaRouter.post("", async (req, res) => {
   }
 });
 reservaRouter.put("/:id", async (req, res) => {
-  const {
-    fechareserva,
-    fechaentrada,
-    fechasalida,
-    habitacionid,
-    personaid,
-  } = req.body;
+  const { fechareserva, fechaentrada, fechasalida, habitacionid, personaid } =
+    req.body;
   const { id } = req.params;
 
-  const reserva = await getReservaById(id)
+  try {
+    const reserva = await getReservaById(id);
 
-  if (fechareserva) {
-    reserva.fechareserva = fechareserva;
-  }
+    if (fechareserva) {
+      reserva.fechareserva = fechareserva;
+    }
 
-  if (fechaentrada) {
-  }
-  if (fechasalida) {
-  }
+    if (fechaentrada) {
+      reserva.fechaentrada = fechaentrada;
+    }
+    if (fechasalida) {
+      reserva.fechasalida = fechasalida;
+    }
 
-  if (habitacionid) {
-  }
-  if (personaid) {
-  }
+    if (habitacionid) {
+      reserva.habitacionid = habitacionid;
+    }
+    if (personaid) {
+      reserva.personaid = personaid;
+    }
 
+    ReservaController.validate(reserva);
+
+    const diffDays = getDaysBetweenDates(
+      reserva.fechaentrada,
+      reserva.fechasalida
+    );
+
+    reserva.montoreserva = diffDays * 120000;
+
+    await updateReserva(reserva);
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
 });
-reservaRouter.delete("/:id", (req, res) => { });
+reservaRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await deleteReserva(id);
+    return res.status(204).send("");
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+});
 
 export default reservaRouter;

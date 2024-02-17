@@ -30,8 +30,8 @@ class Habitacion {
       !habitacionpiso ||
       !habitacionnro ||
       !cantcamas ||
-      !tienetelevision ||
-      !tienefrigobar
+      tienetelevision === undefined ||
+      tienefrigobar === undefined
     ) {
       throw Error("All fields must be setted");
     }

@@ -17,7 +17,7 @@ reservaRouter.get("", async (req, res) => {
     const reservas = await getReservas();
     return res.status(200).json(reservas);
   } catch (err) {
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ message: err.toString() });
   }
 });
 
@@ -26,7 +26,7 @@ reservaRouter.post("", async (req, res) => {
     req.body;
 
   try {
-    const newReserva = Reserva(
+    const newReserva = new Reserva(
       null,
       fechareserva,
       fechaentrada,
@@ -36,7 +36,7 @@ reservaRouter.post("", async (req, res) => {
       0
     );
 
-    ReservaController.validate(newReserva);
+    await ReservaController.validate(newReserva);
 
     const diffDays = getDaysBetweenDates(
       newReserva.fechaentrada,
@@ -48,7 +48,7 @@ reservaRouter.post("", async (req, res) => {
     await addReserva(newReserva);
     return res.status(204).send("");
   } catch (err) {
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ message: err.toString() });
   }
 });
 reservaRouter.put("/:id", async (req, res) => {
@@ -77,7 +77,7 @@ reservaRouter.put("/:id", async (req, res) => {
       reserva.personaid = personaid;
     }
 
-    ReservaController.validate(reserva);
+    await ReservaController.validate(reserva);
 
     const diffDays = getDaysBetweenDates(
       reserva.fechaentrada,
@@ -87,8 +87,9 @@ reservaRouter.put("/:id", async (req, res) => {
     reserva.montoreserva = diffDays * 120000;
 
     await updateReserva(reserva);
+    return res.status(200).json(reserva);
   } catch (err) {
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ message: err.toString() });
   }
 });
 reservaRouter.delete("/:id", async (req, res) => {

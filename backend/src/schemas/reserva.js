@@ -22,17 +22,15 @@ class Reserva {
     }
 
     if (
-      typeof id != "number" ||
-      typeof habitacionid != "number" ||
-      typeof personaid != "number" ||
-      typeof montoreserva != "number"
+      typeof habitacionid !== "number" ||
+      typeof personaid !== "number"
     )
       throw Error("Not valid types");
 
     this.id = id;
-    this.fechareserva = setDate(fechareserva);
-    this.fechaentrada = setDate(fechaentrada);
-    this.fechasalida = setDate(fechasalida);
+    this.fechareserva = fechareserva;
+    this.fechaentrada = fechaentrada;
+    this.fechasalida = fechasalida;
     this.habitacionid = habitacionid;
     this.personaid = personaid;
     this.montoreserva = montoreserva;

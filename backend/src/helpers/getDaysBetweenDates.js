@@ -1,5 +1,7 @@
 export default function getDaysBetweenDates(startDate, endDate) {
-  const oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-  const diffDays = Math.round(Math.abs((start - end) / oneDay));
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const diffTime = Math.abs(end - start);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 }

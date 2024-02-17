@@ -5,14 +5,15 @@ class ReservaController {
    * Validate Reserva object
    * @param {Reserva} reservas
    */
-  static validate(reserva) {
-    if (
-      !isHabitacionFree(
-        reserva.habitacionid,
-        reserva.fechaentrada,
-        reserva.fechasalida
-      )
-    ) {
+  static async validate(reserva) {
+    const isFree = await isHabitacionFree(
+      reserva.id,
+      reserva.habitacionid,
+      reserva.fechaentrada,
+      reserva.fechasalida
+    );
+
+    if (!isFree) {
       throw new Error("habitacion not free");
     }
 

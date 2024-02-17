@@ -4,9 +4,9 @@ import Reserva from "../schemas/reserva.js";
 
 const getInsertUpdateFormatReserva = (reserva) => {
   return [
-    getStringFromDate(reserva.fechareserva),
-    getStringFromDate(reserva.fechaentrada),
-    getStringFromDate(reserva.fechasalida),
+    reserva.fechareserva,
+    reserva.fechaentrada,
+    reserva.fechasalida,
     reserva.habitacionid,
     reserva.personaid,
     reserva.montoreserva,
@@ -71,19 +71,29 @@ export const deleteReserva = async (id) => {
 };
 
 export const isHabitacionFree = async (
+  id,
   habitacionid,
   fechaentrada,
   fechasalida
 ) => {
+  const queryValues = [fechaentrada, fechasalida, habitacionid];
+
+  if (id) {
+    queryValues.push(id);
+  }
+
+  const additionalQuey = id ? "AND id != ?" : "";
+
   const [results] = await executeQuery(
     `
-    SELECT * FROM reservas 
+    SELECT * FROM reserva 
     WHERE 
       fechaentrada <= ? AND 
       fechasalida >= ? AND
-      habitacionid = ?
+      habitacionid = ? 
+      ${additionalQuey}
   `,
-    [fechaentrada, fechasalida, habitacionid]
+    queryValues
   );
 
   const isFree = results.length === 0;

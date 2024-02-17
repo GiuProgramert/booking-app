@@ -1,3 +1,4 @@
+import { executeQuery } from "../config/database.js";
 import getStringFromDate from "../helpers/getStringFromDate.js";
 import Reserva from "../schemas/reserva.js";
 
@@ -67,4 +68,18 @@ export const deleteReserva = async (id) => {
   );
 
   return results
+}
+
+export const isHabitacionFree = async (habitacionid, fechaentrada, fechasalida) => {
+  const [results] = await executeQuery(`
+    SELECT * FROM reservas 
+    WHERE 
+      fechaentrada <= ? AND 
+      fechasalida >= ? AND
+      habitacionid = ?
+  `, [fechaentrada, fechasalida, habitacionid]);
+
+  const isFree = results.length === 0
+
+  return isFree;
 }

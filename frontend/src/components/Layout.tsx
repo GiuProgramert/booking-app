@@ -1,11 +1,14 @@
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
+import "../assets/css/layout.css";
 
 function Layout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="container">
+        <Outlet />
+      </div>
     </>
   );
 }

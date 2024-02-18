@@ -1,0 +1,35 @@
+.habitacion-container {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+  align-items: center;
+}
+
+.habitacion-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.habitacion-acciones__button {
+  border: none;
+  padding: 5px;
+}
+
+.habitacion-acciones .edit {
+  background-color: #8de0f5;
+  color: black;
+
+  &:hover {
+    background-color: #6cc7d9;
+  }	
+}
+
+.habitacion-acciones .delete {
+  background-color: #f58d8d;
+  color: black;
+
+  &:hover {
+    background-color: #d96c6c;
+  }
+}

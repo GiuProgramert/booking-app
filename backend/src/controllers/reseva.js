@@ -18,7 +18,7 @@ class ReservaController {
     }
 
     const today = new Date();
-    if (reserva.fechaentrada < today) {
+    if (new Date(reserva.fechaentrada) < today) {
       throw new Error("La fecha de entrada debe ser mayor a la fecha actual");
     }
 

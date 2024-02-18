@@ -14,16 +14,16 @@ class ReservaController {
     );
 
     if (!isFree) {
-      throw new Error("habitacion not free");
+      throw new Error("La habitacion no esta libre en esas fechas");
     }
 
     const today = new Date();
-    if (reserva.fechaentrada > today) {
-      throw new Error("fechaentrada must be greater that today");
+    if (reserva.fechaentrada < today) {
+      throw new Error("La fecha de entrada debe ser mayor a la fecha actual");
     }
 
     if (reserva.fechaentrada > reserva.fechasalida) {
-      throw new Error("fechasalida must be greater tha fechaentrada");
+      throw new Error("La fecha de salida debe ser mayor a la fecha de entrada");
     }
   }
 }

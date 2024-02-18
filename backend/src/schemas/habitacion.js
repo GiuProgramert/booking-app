@@ -33,7 +33,7 @@ class Habitacion {
       tienetelevision === undefined ||
       tienefrigobar === undefined
     ) {
-      throw Error("All fields must be setted");
+      throw Error("Todos los campos son obligatorios");
     }
 
     return new Habitacion(

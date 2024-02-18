@@ -24,7 +24,7 @@ personaRouter.post("", async (req, res) => {
   if (!nombrecompleto || !nrodocumento) {
     return res
       .status(400)
-      .json({ message: "nombrecompleto or nrodocumento can't be null" });
+      .json({ message: "Nombre completo o número de documento son requeridos" });
   }
 
   const newPersona = new Persona(

@@ -35,7 +35,7 @@ habitacionRouter.post("", async (req, res) => {
       tienetelevision === undefined ||
       tienefrigobar === undefined
     )
-      return res.status(400).json({ message: "fields can't be null" });
+      return res.status(400).json({ message: "Algunos campos son requeridos" });
 
     if (
       typeof tienetelevision !== "boolean" ||
@@ -44,23 +44,23 @@ habitacionRouter.post("", async (req, res) => {
       typeof habitacionnro !== "number" ||
       typeof cantcamas !== "number"
     ) {
-      return res.status(400).json({ message: "Invalid data type" });
+      return res.status(400).json({ message: "Tipo de Dato Invalido" });
     }
 
     if (habitacionpiso < 0 || habitacionpiso > 10)
       return res
         .status(400)
-        .json({ message: "habitacionpiso must be between 0 and 10" });
+        .json({ message: "El piso debe ser entre 0 a 10" });
 
     if (habitacionnro < 0 || habitacionnro > 20)
       return res
         .status(400)
-        .json({ message: "habitacionnro must be between 0 and 20" });
+        .json({ message: "El número deber ser entre 0 a 20" });
 
     if (cantcamas < 0 || cantcamas > 4)
       return res
         .status(400)
-        .json({ message: "cantcamas must be between 0 and 4" });
+        .json({ message: "La cantidad de camas debe ser entre 0 a 4" });
 
     const newHabitacion = new Habitacion(
       null,
@@ -99,23 +99,23 @@ habitacionRouter.put("/:id", async (req, res) => {
       (habitacionnro && typeof habitacionnro !== "number") ||
       (cantcamas && typeof cantcamas !== "number")
     ) {
-      return res.status(400).json({ message: "Invalid data type" });
+      return res.status(400).json({ message: "Tipo de Dato Invalido" });
     }
 
     if (habitacionpiso < 0 || habitacionpiso > 10)
       return res
         .status(400)
-        .json({ message: "habitacionpiso must be between 0 and 10" });
+        .json({ message: "El piso debe ser entre 0 a 10" });
 
     if (habitacionnro < 0 || habitacionnro > 20)
       return res
         .status(400)
-        .json({ message: "habitacionnro must be between 0 and 20" });
+        .json({ message: "El número deber ser entre 0 a 20" });
 
     if (cantcamas < 0 || cantcamas > 4)
       return res
         .status(400)
-        .json({ message: "cantcamas must be between 0 and 4" });
+        .json({ message: "La cantidad de camas debe ser entre 0 a 4" });
 
     if (habitacionpiso) {
       habitacion.habitacionpiso = habitacionpiso;

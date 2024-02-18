@@ -18,14 +18,14 @@ class Reserva {
       personaid === null ||
       montoreserva === null
     ) {
-      throw new Error("Fields cannot be null");
+      throw new Error("Los campos son obligatorios");
     }
 
     if (
       typeof habitacionid !== "number" ||
       typeof personaid !== "number"
     )
-      throw Error("Not valid types");
+      throw Error("No se cumple con el tipo de dato esperado");
 
     this.id = id;
     this.fechareserva = fechareserva;

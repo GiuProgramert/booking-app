@@ -11,7 +11,7 @@ class Persona {
         const { id, nombrecompleto, nrodocumento, correo, telefono } = json;
 
         if (!id || !nombrecompleto || !nrodocumento) {
-            throw Error("persona must have: id, nombrecompleto and nrodocumento");
+            throw Error("una persona debe tener id, nombrecompleto y nrodocumento");
         }
 
         return new Persona(id, nombrecompleto, nrodocumento, correo, telefono);

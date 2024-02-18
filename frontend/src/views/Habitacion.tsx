@@ -3,35 +3,7 @@ import Table, { TableColumn } from "../components/Table";
 import HabitacionController from "../controllers/HabitacionController";
 import IHabitacion from "../models/IHabitacion";
 import "../assets/css/habitacion.css";
-
-interface ActionButtonsProps {
-  row: IHabitacion;
-  onClickEdit: (row: IHabitacion) => void;
-  onClickDelete: (id: number) => void;
-}
-
-function ActionButtons({
-  row,
-  onClickEdit,
-  onClickDelete,
-}: ActionButtonsProps) {
-  return (
-    <div className="habitacion-acciones">
-      <button
-        className="habitacion-acciones__button edit"
-        onClick={() => onClickEdit(row)}
-      >
-        Editar
-      </button>
-      <button
-        className="habitacion-acciones__button delete"
-        onClick={() => onClickDelete(row.id)}
-      >
-        Eliminar
-      </button>
-    </div>
-  );
-}
+import ActionButtons from "../components/ActionButtons";
 
 export default function Habitacion() {
   const {

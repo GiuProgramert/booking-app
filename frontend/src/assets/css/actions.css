@@ -1,0 +1,28 @@
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.actions__button {
+  border: none;
+  padding: 5px;
+}
+
+.actions .edit {
+  background-color: #8de0f5;
+  color: black;
+
+  &:hover {
+    background-color: #6cc7d9;
+  }	
+}
+
+.actions .delete {
+  background-color: #f58d8d;
+  color: black;
+
+  &:hover {
+    background-color: #d96c6c;
+  }
+}

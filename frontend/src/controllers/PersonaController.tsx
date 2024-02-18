@@ -7,6 +7,8 @@ import {
   getPersonas,
   updatePersona,
 } from "../services/persona";
+import toast from "react-hot-toast";
+import IError from "../models/IError";
 
 export default function PersonaController() {
   const [selectedPersona, setSelectedPersona] = useState<
@@ -20,8 +22,11 @@ export default function PersonaController() {
 
       const personas = await getPersonas();
       setPersonas(personas);
-    } catch (err) {
+
+      toast.success("Persona creada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -32,8 +37,11 @@ export default function PersonaController() {
       const personas = await getPersonas();
       setPersonas(personas);
       setSelectedPersona(undefined);
-    } catch (err) {
+
+      toast.success("Persona actualizada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -47,8 +55,10 @@ export default function PersonaController() {
 
       const filteredPersonas = personas.filter((persona) => persona.id !== id);
       setPersonas(filteredPersonas);
-    } catch (err) {
+      toast.success("Persona borrada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 

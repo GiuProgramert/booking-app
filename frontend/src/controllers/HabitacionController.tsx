@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useHabitaciones from "../hooks/useHabitaciones";
+import toast from "react-hot-toast";
 import IHabitacion from "../models/IHabitacion";
 import {
   createHabitacion,
@@ -7,6 +8,7 @@ import {
   getHabitaciones,
   updateHabitacion,
 } from "../services/habitacion";
+import IError from "../models/IError";
 
 export default function HabitacionController() {
   const [selectedHabitacion, setSelectedHabitacion] = useState<
@@ -19,10 +21,12 @@ export default function HabitacionController() {
       await createHabitacion(habitacion);
 
       const habitaciones = await getHabitaciones();
-      console.log(habitaciones);
       setHabitaciones(habitaciones);
-    } catch (err) {
+
+      toast.success("Habitación creada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -33,10 +37,13 @@ export default function HabitacionController() {
       const habitaciones = await getHabitaciones();
       setHabitaciones(habitaciones);
       setSelectedHabitacion(undefined);
-    } catch (err) {
-      console.error(err);
+
+      toast.success("Habitación actualizada correctamente");
+    } catch (err: IError | any) {
+      console.error({err});
+      toast.error(err.message);
     }
-  }
+  };
 
   const handleClickEdit = (row: IHabitacion) => {
     setSelectedHabitacion(row);
@@ -50,8 +57,10 @@ export default function HabitacionController() {
         (habitacion) => habitacion.id !== id
       );
       setHabitaciones(filteredHabitaciones);
-    } catch (err) {
+      toast.success("Habitación borrada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 

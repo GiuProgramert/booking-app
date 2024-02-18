@@ -9,6 +9,8 @@ import {
   getReservas,
   updateReserva,
 } from "../services/reserva";
+import toast from "react-hot-toast";
+import IError from "../models/IError";
 
 export default function ReservaController() {
   const [selectedReserva, setSelectedReserva] = useState<
@@ -33,8 +35,11 @@ export default function ReservaController() {
 
       const reservas = await getReservas();
       setReservas(reservas);
-    } catch (err) {
+
+      toast.success("Reserva creada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -45,8 +50,11 @@ export default function ReservaController() {
       const reservas = await getReservas();
       setReservas(reservas);
       setSelectedReserva(undefined);
-    } catch (err) {
+
+      toast.success("Reserva actualizada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -65,8 +73,10 @@ export default function ReservaController() {
 
       const filteredReservas = reservas.filter((reserva) => reserva.id !== id);
       setReservas(filteredReservas);
-    } catch (err) {
+      toast.success("Reserva borrada correctamente");
+    } catch (err: IError | any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "../../assets/css/form.css";
 import IReserva from "../../models/IReserva";
 import IHabitacion from "../../models/IHabitacion";
@@ -30,7 +30,17 @@ export default function ReservaForm({
   personas,
   onSubmit,
 }: ReservaFormProps) {
-  const inicialState = initialValues ? initialValues : defaultState;
+  const inicialState = useMemo(
+    () =>
+      initialValues
+        ? initialValues
+        : ({
+            ...defaultState,
+            habitacionid: habitaciones[0]?.id ?? 0,
+            personaid: personas[0]?.id ?? 0,
+          } as IReserva),
+    [initialValues, habitaciones, personas]
+  );
 
   const handleFormStateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -63,9 +73,12 @@ export default function ReservaForm({
   const getMontoReserva = () => {
     if (!formState.fechaentrada || !formState.fechasalida) return 0;
 
-    const diffDays = getDaysBetweenDates(formState.fechaentrada, formState.fechasalida);
-    return diffDays * 120000
-  }
+    const diffDays = getDaysBetweenDates(
+      formState.fechaentrada,
+      formState.fechasalida
+    );
+    return diffDays * 120000;
+  };
 
   return (
     <form className="form">
@@ -141,7 +154,13 @@ export default function ReservaForm({
           value={getMontoReserva()}
         />
       </div>
-      <button type="button" onClick={() => onSubmit(formState)}>
+      <button
+        type="button"
+        onClick={() => {
+          onSubmit(formState);
+          setFormState(defaultState);
+        }}
+      >
         {submitButtonText}
       </button>
     </form>

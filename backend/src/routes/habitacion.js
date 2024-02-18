@@ -32,8 +32,8 @@ habitacionRouter.post("", async (req, res) => {
       !habitacionpiso ||
       !habitacionnro ||
       !cantcamas ||
-      !tienetelevision ||
-      !tienefrigobar
+      tienetelevision === undefined ||
+      tienefrigobar === undefined
     )
       return res.status(400).json({ message: "fields can't be null" });
 
